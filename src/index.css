@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --color-arctic: #F1F6F4;
+  --color-mystic: #D9E8E2;
+  --color-forsythia: #FFC801;
+  --color-saffron: #FF9932;
+  --color-nocturnal: #114C5A;
+  --color-oceanic: #172B36;
+  
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  --font-inter: "Inter", sans-serif;
+}
+
+@layer utilities {
+  .font-jetbrains {
+    font-family: var(--font-mono);
+  }
+  
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 400ms ease-in-out, transform 400ms ease-in-out;
+  }
+  .fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1, h2, h3, .font-jetbrains {
+  font-family: var(--font-mono);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-arctic);
+}
+
+/* Stagger animations for hero */
+@keyframes fadeUpAnim {
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUpAnim 200ms ease-in-out forwards;
+}
+
+.delay-0 { animation-delay: 0ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-300 { animation-delay: 300ms; }

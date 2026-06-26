@@ -1,11 +1,7 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Stats from './components/Stats';
 import Features from './components/Features';
 import CaseStudies from './components/CaseStudies';
 import Product from './components/Product';
@@ -16,16 +12,14 @@ import Blog from './components/Blog';
 import Faq from './components/Faq';
 import CtaBanner from './components/CtaBanner';
 import Footer from './components/Footer';
-import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 
 export default function App() {
-  useIntersectionObserver();
-
   return (
     <div className="min-h-screen flex flex-col font-sans">
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <Stats />
         <Features />
         <CaseStudies />
         <Product />

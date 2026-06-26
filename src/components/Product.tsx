@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { useNeuralFlow } from '../hooks/useNeuralFlow';
+
+const ProductCanvas = lazy(() => import('./three/ProductCanvas'));
 
 export default function Product() {
+  const { triggerRef, isFlowActive } = useNeuralFlow(0.2);
+
   return (
-    <section id="product" className="py-24 bg-arctic overflow-hidden">
+    <section id="product" className="py-24 bg-arctic overflow-hidden" ref={triggerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 fade-up">
+        <div className={`text-center mb-16 transition-all duration-[600ms] ease-out ${isFlowActive ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
           <div className="flex items-center justify-center text-saffron font-jetbrains text-sm font-bold tracking-widest mb-4">
             <span className="mr-2">///</span> OUR PRODUCT
           </div>
@@ -17,32 +22,10 @@ export default function Product() {
         </div>
 
         {/* Central Mockup */}
-        <div className="fade-up relative w-full max-w-4xl mx-auto h-[400px] bg-nocturnal rounded-xl border border-nocturnal/10 mb-20 flex items-center justify-center p-8 shadow-2xl">
-          {/* Grid bg */}
-          <div className="absolute inset-0 rounded-xl" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-          
-          <div className="relative w-full h-full flex flex-col md:flex-row items-center justify-between z-10">
-            {/* Connection Lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none hidden md:block" style={{ zIndex: -1 }}>
-              <path d="M 120 150 C 250 150, 200 250, 350 250 C 500 250, 450 100, 600 100" fill="none" stroke="var(--color-forsythia)" strokeWidth="2" strokeDasharray="6 6" className="animate-[dash_20s_linear_infinite]" />
-            </svg>
-
-            {/* Nodes */}
-            <div className="w-48 bg-oceanic border-2 border-forsythia rounded-lg p-4 shadow-lg self-start md:mt-20">
-              <div className="font-jetbrains text-xs text-mystic mb-1 opacity-70">TRIGGER</div>
-              <div className="text-white font-bold font-inter">Email Received</div>
-            </div>
-            
-            <div className="w-48 bg-oceanic border-2 border-forsythia rounded-lg p-4 shadow-lg self-center md:self-end md:mb-10">
-              <div className="font-jetbrains text-xs text-mystic mb-1 opacity-70">TRANSFORM</div>
-              <div className="text-white font-bold font-inter">Extract Entities</div>
-            </div>
-            
-            <div className="w-48 bg-oceanic border-2 border-forsythia rounded-lg p-4 shadow-lg self-end md:self-start md:mt-8">
-              <div className="font-jetbrains text-xs text-mystic mb-1 opacity-70">ACTION</div>
-              <div className="text-white font-bold font-inter">Send to Webhook</div>
-            </div>
-          </div>
+        <div className={`relative w-full max-w-4xl mx-auto h-[400px] bg-nocturnal rounded-xl border border-nocturnal/10 mb-20 overflow-hidden shadow-2xl transition-all duration-[800ms] ease-out ${isFlowActive ? 'scale-100 opacity-100' : 'scale-95 opacity-0'}`}>
+          <Suspense fallback={null}>
+            <ProductCanvas triggerDraw={isFlowActive} />
+          </Suspense>
         </div>
 
         {/* 4 Columns */}
@@ -65,7 +48,7 @@ export default function Product() {
               title: "Production-Ready Stack", desc: "Connect core platforms and scale with your volume."
             }
           ].map((col, i) => (
-            <div key={i} className="fade-up" style={{ transitionDelay: `${i * 100}ms` }}>
+            <div key={i} className={`transition-all duration-[600ms] ease-out ${isFlowActive ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`} style={{ transitionDelay: `${i * 120}ms` }}>
               <div className="w-12 h-12 bg-mystic rounded-lg flex items-center justify-center text-nocturnal mb-6">
                 <div className="w-6 h-6">
                   {col.icon}

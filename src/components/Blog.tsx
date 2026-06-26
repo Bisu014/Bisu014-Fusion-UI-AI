@@ -1,16 +1,19 @@
 import React from 'react';
+import { useNeuralFlow } from '../hooks/useNeuralFlow';
 
 export default function Blog() {
+  const { triggerRef, isFlowActive } = useNeuralFlow(0.1);
+
   return (
-    <section id="blog" className="py-24 bg-mystic overflow-hidden">
+    <section id="blog" className="py-24 bg-mystic overflow-hidden" ref={triggerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-[48px] font-jetbrains text-nocturnal font-bold mb-12 fade-up">
+        <h2 className={`text-4xl md:text-[48px] font-jetbrains text-nocturnal font-bold mb-12 transition-all duration-[600ms] ease-out ${isFlowActive ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
           From the Engineering Desk
         </h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Featured */}
-          <article className="fade-up lg:col-span-2 bg-arctic rounded-2xl overflow-hidden group flex flex-col border border-nocturnal/10 hover:-translate-y-1 transition-transform duration-[200ms] ease-out shadow-sm hover:shadow-lg">
+          <article className={`lg:col-span-2 bg-arctic rounded-2xl overflow-hidden group flex flex-col border border-nocturnal/10 shadow-sm hover:shadow-lg transition-all duration-[600ms] ease-out ${isFlowActive ? 'translate-x-0 opacity-100' : '-translate-x-12 opacity-0'}`}>
             <div className="w-full aspect-video bg-nocturnal relative overflow-hidden flex items-center justify-center">
               <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" className="w-16 h-16 text-oceanic absolute opacity-30">
@@ -35,7 +38,7 @@ export default function Blog() {
           
           {/* Side Articles */}
           <div className="lg:col-span-1 flex flex-col gap-8">
-            <article className="fade-up bg-arctic rounded-2xl p-8 flex flex-col flex-1 border border-nocturnal/10 group hover:-translate-y-1 transition-transform duration-[200ms] ease-out shadow-sm hover:shadow-lg" style={{ transitionDelay: '100ms' }}>
+            <article className={`bg-arctic rounded-2xl p-8 flex flex-col flex-1 border border-nocturnal/10 group shadow-sm hover:shadow-lg transition-all duration-[600ms] ease-out delay-[200ms] ${isFlowActive ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}>
               <div className="flex items-center mb-4">
                 <span className="bg-nocturnal text-saffron text-xs font-jetbrains font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                   Update
@@ -47,7 +50,7 @@ export default function Blog() {
               <div className="text-oceanic/70 font-inter mt-auto pt-4 text-sm">March 28, 2026</div>
             </article>
             
-            <article className="fade-up bg-arctic rounded-2xl p-8 flex flex-col flex-1 border border-nocturnal/10 group hover:-translate-y-1 transition-transform duration-[200ms] ease-out shadow-sm hover:shadow-lg" style={{ transitionDelay: '200ms' }}>
+            <article className={`bg-arctic rounded-2xl p-8 flex flex-col flex-1 border border-nocturnal/10 group shadow-sm hover:shadow-lg transition-all duration-[600ms] ease-out delay-[400ms] ${isFlowActive ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'}`}>
               <div className="flex items-center mb-4">
                 <span className="bg-nocturnal text-saffron text-xs font-jetbrains font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                   Research

@@ -2,5 +2,5 @@
   "name": "NeuralFlow AI",
   "description": "Intelligent Data Automation Platform SaaS landing page",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

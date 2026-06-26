@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNeuralFlow } from '../hooks/useNeuralFlow';
 
 const FAQS = [
   { q: "How does the engine infer schema changes?", a: "It uses a semantic diffing engine that reads unstructured payload shifts in real-time, rewriting mapping rules before the pipeline fails." },
@@ -9,13 +10,14 @@ const FAQS = [
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { triggerRef, isFlowActive } = useNeuralFlow(0.2);
 
   return (
-    <section id="faq" className="py-24 bg-arctic">
+    <section id="faq" className="py-24 bg-arctic" ref={triggerRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
           
-          <div className="lg:col-span-1 fade-up">
+          <div className={`lg:col-span-1 transition-all duration-[600ms] ease-out ${isFlowActive ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'}`}>
             <h2 className="text-5xl md:text-[64px] font-jetbrains font-bold text-nocturnal leading-tight">
               Questions?
             </h2>
@@ -24,7 +26,7 @@ export default function Faq() {
           <div className="lg:col-span-2">
             <div className="space-y-4 border-t border-nocturnal/20 pt-4">
               {FAQS.map((faq, i) => (
-                <div key={i} className="fade-up border-b border-nocturnal/20" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div key={i} className={`border-b border-nocturnal/20 transition-all duration-[500ms] ease-out ${isFlowActive ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`} style={{ transitionDelay: `${i * 120}ms` }}>
                   <button
                     onClick={() => setOpenIndex(openIndex === i ? null : i)}
                     className="w-full flex items-center justify-between py-6 text-left focus:outline-none"
